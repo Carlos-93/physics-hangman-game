@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/Carlos-93/react-weather-map/main/src/img/react.png" width="300">
 </p>
 
-# Welcome to my Hangman Game
+# Welcome to my Physics Hangman Game
 
 Similar to the traditional game of hangman, but with physics terms and concepts. 
 Players must guess words related to physics, which helps them become familiar with scientific vocabulary
