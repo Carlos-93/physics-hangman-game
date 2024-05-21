@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Carlos-93/simon-says-game/main/public/assets/vite.png" width="250">
+  <img src="https://raw.githubusercontent.com/Carlos-93/simon-says-game/main/public/assets/vite.png" width="28%">
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/Carlos-93/react-weather-map/main/src/img/react.png" width="300">
+  <img src="https://raw.githubusercontent.com/Carlos-93/react-weather-map/main/src/img/react.png" width="30%">
 </p>
 
 # Welcome to my Physics Hangman Game
