@@ -10,6 +10,7 @@ const words = ['gravity', 'energy', 'force', 'acceleration', 'mass', 'velocity',
 const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
 
 export default function Game() {
+    
     const [word, setWord] = useState('');
     const [attempts, setAttempts] = useState(0);
     const [guessedLetters, setGuessedLetters] = useState([]);
