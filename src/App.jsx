@@ -1,9 +1,9 @@
-import Game from "./components/game/Game";
-import Logo from "./components/logo/Logo";
+import Logo from './components/Logo/Logo';
+import Game from './components/Game/Game';
 
 export default function App() {
   return (
-    <main className='h-screen grid place-items-center'>
+    <main className='h-screen flex items-center justify-center'>
       <Logo />
       <Game />
     </main>
