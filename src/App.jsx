@@ -1,11 +1,18 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Logo from './components/Logo/Logo';
 import Game from './components/Game/Game';
 
 export default function App() {
   return (
-    <main className='h-screen flex items-center justify-center'>
-      <Logo />
-      <Game />
-    </main>
+    <Router>
+      <Routes>
+        <Route path='/' element={
+          <main className='h-screen grid place-items-center'>
+            <Logo />
+            <Game />
+          </main>
+        } />
+      </Routes>
+    </Router>
   );
 }
