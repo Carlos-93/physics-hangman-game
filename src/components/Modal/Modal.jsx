@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export default function Modal({ message, score, onClose }) {
-    
+
     return (
         <div className="fixed inset-0 backdrop-blur-md bg-black/50 flex justify-center items-center z-50">
             <div className="bg-white py-5 px-10 flex flex-col justify-center items-center rounded-xl gap-5 w-auto">

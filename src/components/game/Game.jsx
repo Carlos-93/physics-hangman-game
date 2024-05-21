@@ -25,18 +25,14 @@ export default function Game() {
 
     useEffect(() => {
         if (attempts >= 10) {
-            setModalMessage('Game Over!');
-            setShowModal(true);
-            setIsGameOver(true);
+            endGame('Game Over!');
         }
     }, [attempts]);
 
     useEffect(() => {
         if (word && word.split('').every(letter => guessedLetters.includes(letter.toUpperCase()))) {
             setScore(prevScore => prevScore + 100);
-            setModalMessage('Has completado la palabra');
-            setShowModal(true);
-            setIsGameOver(true);
+            endGame('Congratulations! You won!');
         }
     }, [guessedLetters, word]);
 
@@ -49,6 +45,12 @@ export default function Game() {
         setShowModal(false);
         setModalMessage('');
         setIsGameOver(false);
+    }
+
+    function endGame(message) {
+        setModalMessage(message);
+        setShowModal(true);
+        setIsGameOver(true);
     }
 
     function closeModal() {
@@ -70,56 +72,57 @@ export default function Game() {
 
     return (
         <main className="flex flex-col w-[80rem] backdrop-blur-2xl rounded-3xl border border-yellow-400 mx-5 p-5">
-            <section className='flex items-center justify-between'>
+            <header className='flex items-center justify-between'>
                 <Instructions />
                 <Title />
-            </section>
+            </header>
 
             <section className="flex flex-col justify-center items-center">
-                <Hangman attempts={attempts} />
+                <div className="flex flex-col xl:flex-row w-full my-10 gap-16 justify-center md:justify-between items-center">
+                    <Hangman attempts={attempts} />
 
-                <article className='my-10 flex justify-center items-center'>
-                    {word.split('').map((letter, index) => (
-                        <span key={index} className="text-2xl mx-1 text-white">
-                            {guessedLetters.includes(letter.toUpperCase()) ? letter.toUpperCase() : '__'}
-                        </span>
-                    ))}
-                </article>
+                    <div className='flex-1 flex justify-center items-center'>
+                        {word.split('').map((letter, index) => (
+                            <span key={index} className="text-2xl mx-1 text-white">
+                                {guessedLetters.includes(letter.toUpperCase()) ? letter.toUpperCase() : '__'}
+                            </span>
+                        ))}
+                    </div>
 
-                <article className='mx-44 flex flex-wrap justify-center items-center gap-1 mb-10 mt-5'>
-                    {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter) => {
-                        let backgroundColor = 'bg-yellow-400';
-                        let hoverColor = 'hover:bg-yellow-500';
-                        let textColor = 'text-black';
-                        let buttonClass = '';
+                    <div className='flex-1 flex flex-wrap justify-center items-center gap-1 lg:mx-40 xl:mx-0'>
+                        {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter) => {
+                            let backgroundColor = 'bg-yellow-400';
+                            let hoverColor = 'hover:bg-yellow-500';
+                            let textColor = 'text-black';
+                            let buttonClass = '';
 
-                        if (letterStatus[letter] === 'correct') {
-                            backgroundColor = 'bg-green-600'; hoverColor = 'hover:bg-green-600';
-                        } else if (letterStatus[letter] === 'incorrect') {
-                            backgroundColor = 'bg-red-600'; hoverColor = 'hover:bg-red-600';
-                        }
+                            if (letterStatus[letter] === 'correct') {
+                                backgroundColor = 'bg-green-600'; hoverColor = 'hover:bg-green-600';
+                            } else if (letterStatus[letter] === 'incorrect') {
+                                backgroundColor = 'bg-red-600'; hoverColor = 'hover:bg-red-600';
+                            }
+                            if (isGameOver) {
+                                buttonClass = 'opacity-70 cursor-not-allowed';
+                            }
+                            return (
+                                <Button key={letter} onClick={() => handleGuess(letter)}
+                                    backgroundColor={backgroundColor} textColor={textColor} hoverColor={hoverColor} className={buttonClass} disabled={isGameOver}>
+                                    {letter}
+                                </Button>
+                            );
+                        })}
+                    </div>
+                </div>
 
-                        if (isGameOver) {
-                            buttonClass = 'opacity-70 cursor-not-allowed';
-                        }
-
-                        return (
-                            <Button key={letter} onClick={() => handleGuess(letter)}
-                                backgroundColor={backgroundColor} textColor={textColor} hoverColor={hoverColor} className={buttonClass} disabled={isGameOver}>
-                                {letter}
-                            </Button>
-                        );
-                    })}
-                </article>
 
                 <Button onClick={startGame} backgroundColor="bg-red-600" textColor="text-white" hoverColor="hover:bg-red-500">
                     Reset Game
                 </Button>
 
-                <article className="flex absolute bottom-0 right-0 bg-white/20 w-fit px-5 py-2.5 m-5 rounded-xl text-white text-lg">
+                <div className="flex absolute bottom-0 right-0 bg-white/20 w-fit px-5 py-2.5 m-6 rounded-xl text-white text-lg">
                     <p className='font-medium'>Score:</p>
                     <p className='font-medium text-yellow-400 w-10 text-end'>{score}</p>
-                </article>
+                </div>
             </section>
             {showModal && <Modal message={modalMessage} score={score} onClose={closeModal} />}
         </main>

@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types';
 
-export default function Button({ children, onClick, backgroundColor, textColor, hoverColor, className, disabled }) {
+export default function Button({
+    children,
+    onClick,
+    backgroundColor = 'bg-yellow-400',
+    textColor = 'text-black',
+    hoverColor = 'hover:bg-yellow-500',
+    className = '',
+    disabled = false,
+}) {
     const buttonClass = `${backgroundColor} ${textColor} ${hoverColor} text-xl font-semibold py-2.5 px-6 rounded-lg my-1 transition-all ease-in-out duration-300 ${className}`;
 
     return (
@@ -18,12 +26,4 @@ Button.propTypes = {
     hoverColor: PropTypes.string,
     className: PropTypes.string,
     disabled: PropTypes.bool,
-};
-
-Button.defaultProps = {
-    backgroundColor: 'bg-yellow-400',
-    textColor: 'text-black',
-    hoverColor: 'hover:bg-yellow-500',
-    className: '',
-    disabled: false,
 };

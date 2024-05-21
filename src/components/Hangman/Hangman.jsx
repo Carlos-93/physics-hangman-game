@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Hangman({ attempts }) {
@@ -43,7 +44,7 @@ export default function Hangman({ attempts }) {
             {/* Right leg */}
             <line x1="150" y1="170" x2="180" y2="200" stroke="red" strokeWidth="4" />
         </>,
-    ];
+    ].map((stage, index) => React.cloneElement(stage, { key: index }));
 
     return (
         <svg width="200" height="250">
