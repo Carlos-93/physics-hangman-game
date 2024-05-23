@@ -24,6 +24,7 @@ export default function Game() {
     const [attempts, setAttempts] = useState(0);
     const [score, setScore] = useState(0);
     const [time, setTime] = useState(0);
+    const [gameWon, setGameWon] = useState(false);
 
     // Get the user_id from the URL
     const params = new URLSearchParams(window.location.search);
@@ -40,6 +41,7 @@ export default function Game() {
         setModalOpen(false);
         setModalMessage('');
         setIsGameOver(false);
+        setGameWon(false);
         setTime(0);
     }
 
@@ -47,7 +49,6 @@ export default function Game() {
         setModalMessage(message);
         setModalOpen(true);
         setIsGameOver(true);
-        processGameResult();
     }
 
     const closeModalAndRedirect = () => {
@@ -69,10 +70,10 @@ export default function Game() {
     }
 
     // Callbacks
-    const processGameResult = useCallback(async () => {
+    const processGameResult = useCallback(async (finalScore) => {
         try {
             await axios.post('http://127.0.0.1:8000/api/game-results', {
-                score: score,
+                score: finalScore,
                 user_id: user_id,
                 game_id: game_id,
                 time: time,
@@ -82,7 +83,7 @@ export default function Game() {
         } finally {
             setModalOpen(true);
         }
-    }, [score, user_id, game_id, time]);
+    }, [user_id, game_id, time]);
 
     // Effects
     useEffect(() => {
@@ -92,15 +93,21 @@ export default function Game() {
     useEffect(() => {
         if (attempts >= 10) {
             endGame('Game Over!');
+            processGameResult(score);
         }
     }, [attempts]);
 
     useEffect(() => {
         if (word && word.split('').every(letter => guessedLetters.includes(letter.toUpperCase()))) {
-            setScore(prevScore => prevScore + 100);
-            endGame('Congratulations! You won!');
+            if (!gameWon) {
+                const newScore = score + 100;
+                setScore(newScore);
+                endGame('Congratulations! You won!');
+                processGameResult(newScore);
+                setGameWon(true);
+            }
         }
-    }, [guessedLetters, word]);
+    }, [guessedLetters, word, score, gameWon]);
 
     useEffect(() => {
         if (!isGameOver) {
