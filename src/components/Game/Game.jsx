@@ -13,7 +13,6 @@ const words = ['gravity', 'energy', 'force', 'acceleration', 'mass', 'velocity',
 const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
 
 export default function Game() {
-
     // State variables
     const [word, setWord] = useState('');
     const [guessedLetters, setGuessedLetters] = useState([]);
@@ -131,7 +130,6 @@ export default function Game() {
                 <div className="flex flex-col xl:flex-row w-full my-10 gap-16 justify-center md:justify-between items-center">
                     {/* Hangman component */}
                     <Hangman attempts={attempts} />
-
                     {/* Word's letters */}
                     <div className='flex-1 flex justify-center items-center'>
                         {word.split('').map((letter, index) => (
@@ -140,7 +138,6 @@ export default function Game() {
                             </span>
                         ))}
                     </div>
-
                     {/* Buttons for the letters */}
                     <div className='flex-1 flex flex-wrap justify-center items-center gap-1 lg:mx-40 xl:mx-0'>
                         {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter) => {
@@ -166,19 +163,16 @@ export default function Game() {
                         })}
                     </div>
                 </div>
-
                 {/* Component to reset the game */}
                 <Button onClick={startGame} backgroundColor="bg-red-600" textColor="text-white" hoverColor="hover:bg-red-500">
                     Reset Game
                 </Button>
-
                 {/* Score */}
                 <div className="flex absolute bottom-0 right-0 bg-white/20 w-fit px-5 py-2.5 m-6 rounded-xl text-white text-lg">
                     <p className='font-medium'>Score:</p>
                     <p className='font-medium text-yellow-400 w-10 text-end'>{score}</p>
                 </div>
             </section>
-
             {/* Modal component */}
             {modalOpen && <Modal message={modalMessage} score={score} onClose={closeModalAndRedirect} />}
         </main>
