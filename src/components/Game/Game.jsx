@@ -6,8 +6,8 @@ import Hangman from '../Hangman/Hangman';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 
-// Words for the game
-const words = ['gravity', 'energy', 'force', 'acceleration', 'mass', 'velocity', 'power', 'work', 'heat', 'temperature', 'pressure', 'volume', 'density'];
+// Physics words for the game
+const words = ['newton', 'einstein', 'galileo', 'ampere', 'faraday', 'tesla', 'maxwell', 'hertz', 'ohm', 'volt', 'watt', 'force', 'energy', 'particle', 'speed', 'mass', 'volume'];
 
 // Function to get a random word from the words array
 const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
@@ -20,6 +20,7 @@ export default function Game() {
     const [modalMessage, setModalMessage] = useState('');
     const [isGameOver, setIsGameOver] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
+    const [errors, setErrors] = useState(0);
     const [attempts, setAttempts] = useState(0);
     const [score, setScore] = useState(0);
     const [time, setTime] = useState(0);
@@ -42,6 +43,7 @@ export default function Game() {
         setIsGameOver(false);
         setGameWon(false);
         setTime(0);
+        setErrors(0);
     }
 
     const endGame = (message) => {
@@ -64,6 +66,7 @@ export default function Game() {
             } else {
                 setLetterStatus({ ...letterStatus, [letter]: 'incorrect' });
                 setAttempts(attempts + 1);
+                setErrors(errors + 1);
             }
         }
     }
@@ -162,6 +165,11 @@ export default function Game() {
                             );
                         })}
                     </div>
+                </div>
+                {/* Erros */}
+                <div className="flex absolute bottom-0 left-0 bg-white/20 w-fit px-5 py-2.5 m-6 rounded-xl text-white text-lg">
+                    <p className='font-medium'>Errors:</p>
+                    <p className='font-medium text-yellow-400 w-16 text-center'>{errors} / 10</p>
                 </div>
                 {/* Component to reset the game */}
                 <Button onClick={startGame} backgroundColor="bg-red-600" textColor="text-white" hoverColor="hover:bg-red-500">
