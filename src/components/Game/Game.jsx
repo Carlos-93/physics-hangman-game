@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 import Instructions from '../Instructions/Instructions';
 import Title from '../Title/Title';
 import Hangman from '../Hangman/Hangman';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
+import processGameResult from '../../services/api';
 
 // Physics words for the game
 const words = ['newton', 'einstein', 'galileo', 'ampere', 'faraday', 'tesla', 'maxwell', 'hertz', 'ohm', 'volt', 'watt', 'force', 'energy', 'particle', 'speed', 'mass', 'volume'];
@@ -13,7 +13,7 @@ const words = ['newton', 'einstein', 'galileo', 'ampere', 'faraday', 'tesla', 'm
 const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
 
 export default function Game() {
-    // State variables
+    // State variables for the game 
     const [word, setWord] = useState('');
     const [guessedLetters, setGuessedLetters] = useState([]);
     const [letterStatus, setLetterStatus] = useState({});
@@ -72,19 +72,9 @@ export default function Game() {
     }
 
     // Callbacks
-    const processGameResult = useCallback(async (finalScore) => {
-        try {
-            await axios.post('http://127.0.0.1:8000/api/game-results', {
-                score: finalScore,
-                user_id: user_id,
-                game_id: game_id,
-                time: time,
-            });
-        } catch (error) {
-            console.error('Error al enviar el resultado del juego:', error);
-        } finally {
-            setModalOpen(true);
-        }
+    const handleGameResult = useCallback(async (finalScore) => {
+        await processGameResult(finalScore, user_id, game_id, time);
+        setModalOpen(true);
     }, [user_id, game_id, time]);
 
     // Effects
@@ -95,7 +85,7 @@ export default function Game() {
     useEffect(() => {
         if (attempts >= 10) {
             endGame('Game Over!');
-            processGameResult(score);
+            handleGameResult(score);
         }
     }, [attempts]);
 
@@ -105,7 +95,7 @@ export default function Game() {
                 const newScore = score + 100;
                 setScore(newScore);
                 endGame('Congratulations! You won!');
-                processGameResult(newScore);
+                handleGameResult(newScore);
                 setGameWon(true);
             }
         }
