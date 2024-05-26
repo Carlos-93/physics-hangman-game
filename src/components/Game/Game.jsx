@@ -112,7 +112,7 @@ export default function Game() {
 
     // Render the component
     return (
-        <main className="flex flex-col w-[80rem] backdrop-blur-2xl rounded-3xl border border-yellow-400 mx-5 p-5">
+        <main className="flex flex-col w-[80rem] backdrop-blur-2xl rounded-3xl border border-yellow-400 mx-6 p-5">
             {/* Instructions and Title components */}
             <header className='flex items-center justify-between'>
                 <Instructions />
@@ -132,7 +132,7 @@ export default function Game() {
                         ))}
                     </div>
                     {/* Buttons for the letters */}
-                    <div className='flex-1 flex flex-wrap justify-center items-center gap-1 lg:mx-40 xl:mx-0'>
+                    <div className='flex-1 flex flex-wrap justify-center gap-[2px] lg:mx-40 xl:mx-0'>
                         {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter) => {
                             let backgroundColor = 'bg-yellow-400';
                             let hoverColor = 'hover:bg-yellow-500';
