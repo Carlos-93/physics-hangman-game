@@ -1,6 +1,4 @@
-
 export default function Instructions() {
-    
     return (
         <article className="flex bg-white/20 w-fit px-4 py-3 rounded-xl text-sm">
             <div className='flex flex-col items-start gap-1'>

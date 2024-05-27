@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 export default function Button({
-    
     children,
     onClick,
     backgroundColor = 'bg-yellow-400',
