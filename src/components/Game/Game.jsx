@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import Instructions from '../Instructions/Instructions';
 import Title from '../Title/Title';
+import Instructions from '../Instructions/Instructions';
 import Hangman from '../Hangman/Hangman';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
