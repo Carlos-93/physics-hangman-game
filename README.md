@@ -1,8 +1,4 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Carlos-93/react-weather-map/main/src/img/react.png" width="35%">
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/Carlos-93/physics-hangman-game/main/public/vite.png" width="30%">
-</p>
+<p align="center"><img src="https://raw.githubusercontent.com/Carlos-93/react-weather-map/main/src/img/react.png" width="35%"></p>
 
 # Welcome to my Physics Hangman Game
 
